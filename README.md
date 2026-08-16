@@ -1,86 +1,37 @@
 # Facebook Messenger Bulk Deleter
 
-A Python + Playwright utility that automates bulk deletion of Messenger chats from the Facebook web UI.
+A high-speed Python automation script using Playwright to bulk-delete Facebook Messenger chats. Meta does not provide a native bulk-delete feature, so this tool automates the manual deletion process directly via the web UI.
 
----
+## ⚠️ Disclaimer
+**For Educational Purposes Only.** 
+Using automated scripts on Meta platforms violates their Terms of Service. Executing this script at high speeds or for prolonged periods may result in temporary action blocks or permanent account bans. Use this tool entirely at your own risk. The author is not responsible for any account penalties.
 
-## ⚠️ DISCLAIMER — READ BEFORE USE
+## Features
+* **Session Persistence:** Saves your login and 2FA session locally so you don't have to re-authenticate on every run.
+* **Auto-Batching & Reloading:** Deletes chats in batches of 50 and automatically refreshes the page to prevent memory leaks and React UI freezes.
+* **High-Speed Execution:** Bypasses visual hover delays by dispatching DOM click events directly.
 
-**Use this tool entirely at your own risk.**
-
-- This project is **not affiliated with, endorsed by, or supported by Meta/Facebook**.
-- Automating interactions with Facebook may **violate Facebook's Terms of Service** and can result in **account restrictions, temporary locks, or permanent bans**.
-- **Deleted chats cannot be recovered.** This tool permanently removes conversations from your account.
-- Facebook frequently changes its web UI. Selectors in this script **may stop working without notice**.
-- The local browser profile (`fb_playwright_profile/`) stores your **login session and authentication tokens**. Never share or commit this folder.
-- The authors and contributors accept **no liability** for data loss, account action, or any other damages arising from use of this software.
-
-By running this script, you acknowledge that you understand these risks and accept full responsibility for your actions.
-
----
-
-## Requirements
-
-- Python 3.9+
-- [Playwright](https://playwright.dev/python/) with Chromium
-
-## Setup
-
-```bash
-# Create and activate a virtual environment (recommended)
-python -m venv .venv
-.venv\Scripts\activate        # Windows
-# source .venv/bin/activate   # macOS/Linux
-
-# Install dependencies
-pip install playwright
-
-# Install the Chromium browser
-playwright install chromium
-```
+## Installation
+1. Clone the repository and navigate to the directory.
+2. Install dependencies:
+   ```bash
+   pip install playwright
+   playwright install chromium
+   ```
 
 ## Usage
-
 1. Run the script:
-
    ```bash
    python delete_messenger_chats.py
    ```
+2. A Chromium window opens to Messenger. **Log in manually** if prompted.
+3. Ensure your **chat list sidebar is fully visible**.
+4. Return to the terminal and press **ENTER** to start the high-speed 50-batch deletion.
+5. The script deletes chats automatically in batches of 50 until no more chats are found.
+6. Press **ENTER** again to close the browser when finished.
 
-2. A Chromium window opens to Messenger. **Log in manually** if you are not already authenticated.
-
-3. Make sure your **chat list sidebar is visible** on the left.
-
-4. Return to the terminal and press **ENTER** to begin deletion.
-
-5. The script deletes chats in batches of **50**, clicking through each chat's "More options → Delete chat" flow automatically.
-
-6. When no more chats are found, the script stops and reports the total deleted.
-
-7. Press **ENTER** again to close the browser.
-
-## How It Works
-
-- Uses a **persistent Playwright browser profile** (`fb_playwright_profile/`) so you only need to log in once.
-- Targets the first visible chat in the sidebar on each iteration.
-- Dismisses common pop-up dialogs (e.g. "Don't restore messages") before each batch.
-- Processes up to `BATCH_LIMIT` (50) chats per batch, then continues until the list is empty.
-
-## Security Notes
-
-- `fb_playwright_profile/` is listed in `.gitignore` and **must never be pushed to GitHub** or shared.
-- Do not run this on untrusted or shared machines while logged in.
-- Consider logging out and deleting the profile folder when you are finished.
-
-## Troubleshooting
-
-| Problem | Suggestion |
-|---|---|
-| Script can't find chats | Ensure the Messenger sidebar is open and chats are loaded |
-| "Delete chat" menu not found | Facebook may have changed its UI — update selectors in the script |
-| Account warning from Facebook | Stop immediately; continued automation increases ban risk |
-| Login keeps expiring | Delete `fb_playwright_profile/` and log in fresh |
+## Security
+The `fb_playwright_profile/` directory stores your Facebook session cookies and authentication tokens. It is listed in `.gitignore` and **must never be committed to GitHub** or shared with anyone.
 
 ## License
-
 Provided as-is with no warranty. Use responsibly.

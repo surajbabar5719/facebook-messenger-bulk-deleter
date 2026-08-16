@@ -1,42 +1,7 @@
-# Playwright browser profile — contains Facebook session cookies/tokens
+# Ignore Playwright session data (CRITICAL for security)
 fb_playwright_profile/
 
-# Python
+# Ignore Python caches
 __pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-
-# Virtual environments
-.venv/
-venv/
-ENV/
-env/
-
-# IDE / OS
-.idea/
-.vscode/
-*.swp
-*.swo
+*.pyc
 .DS_Store
-Thumbs.db
-
-# Secrets
-.env
-.env.*
